@@ -182,7 +182,12 @@ namespace StateMachine
 
         public static Condition Time(float seconds)
         {
-            return new Condition(state => state.lastEnterTime + seconds < UnityEngine.Time.time);
+            return Time(() => seconds);
+        }
+
+        public static Condition Time(Func<float> seconds)
+        {
+            return new Condition(state => state.lastEnterTime + seconds() < UnityEngine.Time.time);
         }
     }
 }
